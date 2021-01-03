@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.emersonhora.algamoney.api.model.Category;
+import com.emersonhora.algamoney.api.entity.Category;
 import com.emersonhora.algamoney.api.repository.CategoryRepository;
 import com.emersonhora.algamoney.api.services.exceptions.ResourceNotFoundException;
 

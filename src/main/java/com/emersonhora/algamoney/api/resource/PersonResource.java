@@ -16,37 +16,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.emersonhora.algamoney.api.entity.Category;
+import com.emersonhora.algamoney.api.entity.Person;
 import com.emersonhora.algamoney.api.event.AddResourceEvent;
-import com.emersonhora.algamoney.api.services.CategoryService;
+import com.emersonhora.algamoney.api.services.PersonService;
 
 @RestController
-@RequestMapping("/categories")
-public class CategoryResource  {
+@RequestMapping("/persons")
+public class PersonResource  {
 
 	@Autowired
-	private CategoryService service;
+	private PersonService service;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
 	@GetMapping
-	public List<Category> list(){
+	public List<Person> list(){
 		return service.findAll();
 	}
-	
 	@GetMapping("/{id}")
-	public ResponseEntity<Category> show(@PathVariable Long id ) {
+	public ResponseEntity<Person> show(@PathVariable Long id ) {
 		return ResponseEntity.ok(service.findById(id));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Category> insert(@Valid @RequestBody Category category, HttpServletResponse response) {
-		category = service.insert(category);
+	public ResponseEntity<Person> insert(@Valid @RequestBody Person person, HttpServletResponse response) {
+		person = service.insert(person);
 
-		publisher.publishEvent(new AddResourceEvent(this, response, category.getId()));
+		publisher.publishEvent(new AddResourceEvent(this, response, person.getId()));
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(category);
-
+		return ResponseEntity.status(HttpStatus.CREATED).body(person);
 	}
 }

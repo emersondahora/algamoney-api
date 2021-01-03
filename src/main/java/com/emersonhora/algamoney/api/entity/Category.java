@@ -1,4 +1,4 @@
-package com.emersonhora.algamoney.api.model;
+package com.emersonhora.algamoney.api.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
