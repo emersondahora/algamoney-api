@@ -1,6 +1,7 @@
 package com.emersonhora.algamoney.api.resource.exceptions;
 
 import java.time.Instant;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -64,6 +65,7 @@ public class ResourceExceptionHandler {
 	public void emptyResultDataAccessException(EmptyResultDataAccessException e, HttpServletRequest request) {
 		
 	}
+
 	
 	
 }
