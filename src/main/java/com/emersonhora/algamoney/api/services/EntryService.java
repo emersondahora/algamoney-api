@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.emersonhora.algamoney.api.entity.Category;
@@ -12,6 +14,7 @@ import com.emersonhora.algamoney.api.entity.Person;
 import com.emersonhora.algamoney.api.repository.CategoryRepository;
 import com.emersonhora.algamoney.api.repository.EntryRepository;
 import com.emersonhora.algamoney.api.repository.PersonReporitory;
+import com.emersonhora.algamoney.api.repository.filter.EntryFilter;
 import com.emersonhora.algamoney.api.services.exceptions.PersonInaciveException;
 import com.emersonhora.algamoney.api.services.exceptions.ResourceNotFoundException;
 
@@ -27,8 +30,8 @@ public class EntryService {
 	@Autowired
 	private PersonService personService;
 	
-	public List<Entry> findAll() {
-		return repository.findAll();
+	public Page<Entry> filter(EntryFilter entryFilter, Pageable pageable) {
+		return repository.filter(entryFilter, pageable);
 	}
 	public Entry findById(Long id) {
 		Optional<Entry> obj = repository.findById(id);
@@ -44,6 +47,9 @@ public class EntryService {
 		entry.setPerson(person);
 		
 		return repository.save(entry);
+	}
+	public void delete(Long id) {
+		repository.deleteById(id);
 	}
 	
 }
